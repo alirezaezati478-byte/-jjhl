@@ -1,0 +1,430 @@
+<!doctype html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>سامانه مدیریت مناقصه مهستان هشتگرد — نسخه ۸٫۰</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+:root{--bg:#f4f6f9;--card:#ffffff;--ink:#1c2434;--mut:#5b6b82;--line:#e3e8f0;--acc:#0e5fd8;--acc2:#f59e0b;--ok:#0f9d6e;--bad:#d64545;--warn:#c07a00;--sh1:0 1px 2px rgba(16,30,60,.06);--sh2:0 6px 18px rgba(16,30,60,.09);--sh3:0 14px 40px rgba(16,30,60,.14);--r1:8px;--r2:14px;--sp:14px}
+html[data-theme="dark"]{--bg:#0d1220;--card:#151c2e;--ink:#e8edf6;--mut:#93a1b8;--line:#26314a;--acc:#5b9bff;--acc2:#fbbf24;--ok:#34d399;--bad:#f87171;--warn:#fbbf24}
+*{box-sizing:border-box}
+body{margin:0;font-family:Vazirmatn,'Vazirmatn',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.8}
+header.top{background:linear-gradient(135deg,#0e5fd8,#083a8c);color:#fff;padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:var(--sh3)}
+header.top h1{margin:0;font-size:18px;flex:1;min-width:260px}
+header.top .sub{font-size:12px;opacity:.85}
+#themeBtn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:var(--r1);padding:6px 12px;cursor:pointer;font-family:inherit;font-size:13px;transition:transform .16s}
+#themeBtn:hover{transform:translateY(-1px)}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;box-shadow:var(--sh1)}
+nav.tabs button{font-family:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--mut);border-radius:99px;padding:5px 13px;cursor:pointer;transition:all .16s}
+nav.tabs button:hover{color:var(--acc);border-color:var(--acc)}
+nav.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+main{padding:18px;max-width:1280px;margin:0 auto}
+section.tab{display:none;animation:fade .2s}
+section.tab.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.grid{display:grid;gap:var(--sp)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r2);box-shadow:var(--sh1);padding:16px;transition:box-shadow .16s,transform .16s}
+.card:hover{box-shadow:var(--sh2)}
+.card h3{margin:0 0 10px;font-size:14.5px;color:var(--acc)}
+.kpi{border-top:3px solid var(--acc)}
+.kpi .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.kpi .l{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+th{background:var(--bg);color:var(--mut);font-weight:600;padding:8px 6px;text-align:right;border-bottom:2px solid var(--line);white-space:nowrap}
+td{padding:7px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+tr:hover td{background:color-mix(in srgb,var(--acc) 5%,transparent)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r1)}
+input,select{font-family:inherit;font-size:13px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:var(--r1);padding:6px 9px;width:100%;transition:border-color .16s}
+input:focus,select:focus{outline:none;border-color:var(--acc)}
+input.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--bg))}
+label{display:block;font-size:11.5px;color:var(--mut);margin-bottom:4px}
+.fl{margin-bottom:9px}
+button.act{font-family:inherit;font-size:12.5px;background:var(--acc);color:#fff;border:none;border-radius:var(--r1);padding:7px 15px;cursor:pointer;transition:transform .16s,filter .16s}
+button.act:hover{transform:translateY(-1px);filter:brightness(1.08)}
+button.act.ghost{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+button.act.danger{background:var(--bad)}
+.sig{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r1);font-size:12.5px;margin-bottom:8px;border:1px solid var(--line);background:var(--bg)}
+.sig .d{width:9px;height:9px;border-radius:50%;margin-top:7px;flex:none}
+.sig.ok .d{background:var(--ok)} .sig.warn .d{background:var(--warn)} .sig.bad .d{background:var(--bad)}
+.note{font-size:12px;color:var(--mut);margin-top:6px}
+.chain li{margin-bottom:6px;font-size:13px}
+.chain{padding-right:18px;margin:8px 0}
+.tag{display:inline-block;font-size:11px;padding:2px 9px;border-radius:99px;background:color-mix(in srgb,var(--acc) 12%,transparent);color:var(--acc)}
+.match-ok{color:var(--ok);font-weight:700} .match-bad{color:var(--bad);font-weight:700}
+svg text{font-family:Vazirmatn,sans-serif;font-size:10.5px;fill:var(--mut)}
+@media print{header.top,nav.tabs,.noprint{display:none!important}body{background:#fff;color:#000}section.tab{display:none}section.tab.on{display:block}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+ <h1>🏗️ سامانه مدیریت مناقصه — پروژه مهستان هشتگرد<span class="sub"> | کارفرما: شرکت اسپاس جم — قطعه ۴۰۲۶ (محور) و پرتفوی ۴ قطعه — مهر/آبان ۱۴۰۵</span></h1>
+ <button id="themeBtn" data-act="theme">🌙 تم تاریک</button>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<main id="main"></main>
+
+<script>
+"use strict";
+/* ================= ثابت‌های مستند ================= */
+const BK=139368652014; // قیمت پایه مستند برگه قطعه 4026 (ریال)
+const SEASONS=92735667254, OH=0.41, RG=0.0375, EQ=0.04;
+const FX={usdGov:1860470,usdFree:2698000,eurGov:2079860,eurFree:3005900,equipPct:0.35};
+const VERS=["mahastanV60","mahastanV50","mahastanV40"], KEY="mahastanV80";
+/* ================= داده پیش‌فرض ================= */
+function defData(){return{
+ projs:[
+  {n:4190,units:9,area:1345,price:366404818623},
+  {n:4026,units:4,area:732.85,price:243160430768},
+  {n:4231,units:9,area:2362.66,price:542429572574},
+  {n:4154,units:12,area:2590.12,price:606908409609}],
+ sh:{profit:12,tax:0,m104:0,room:0,audit:0,wAb:70,wMk:30,wBr:0},
+ risk:{profit:10,tax:0,m104:0,room:0,audit:0,ohPct:OH,rgPct:RG,eqPct:EQ},
+ cash:{months:12,prepay:20,ret:10,infl:2.5,esc:6},
+ mach:{share:8,items:[
+  {n:"بیل مکانیکی کاترپیلار ۳۲۰",c:2,rate:950,mo:10,st:1,buy:42000,rent:950,months:10,resale:29400},
+  {n:"لودر کوماتسو WA380",c:2,rate:620,mo:10,st:1,buy:29000,rent:620,months:10,resale:20300},
+  {n:"کمپرسی بنز اکتروس ۶چرخ",c:8,rate:540,mo:10,st:1,buy:22000,rent:540,months:10,resale:15400},
+  {n:"گریدر کاترپیلار ۱۴۰",c:1,rate:780,mo:8,st:2,buy:35000,rent:780,months:8,resale:24500},
+  {n:"غلتک ویبراتور بومگ",c:2,rate:410,mo:8,st:2,buy:18000,rent:410,months:8,resale:12600},
+  {n:"تری‌اسکرپر",c:1,rate:1300,mo:6,st:2,buy:95000,rent:1300,months:6,resale:66500},
+  {n:"بچینگ پلانت ۱۲۰ مترمکعب",c:1,rate:1650,mo:9,st:1,buy:180000,rent:1650,months:9,resale:126000},
+  {n:"پمپ بتن ۳۱ متر",c:1,rate:1150,mo:9,st:3,buy:85000,rent:1150,months:9,resale:59500},
+  {n:"تاورکرین",c:1,rate:1450,mo:7,st:4,buy:160000,rent:1450,months:7,resale:112000}]},
+ gantt:[
+  {n:"آماده‌سازی کارگاه و دیوار محوطه",w:2,act:3},{n:"عملیات خاکی و مسیر دسترسی",w:5,act:4},
+  {n:"اجرای شمع و فونداسیون",w:8,act:6},{n:"اسکلت بتنی طبقات",w:12,act:10},
+  {n:"دیوارچینی و کفسازی",w:8,act:7},{n:"تاسیسات مکانیکی (لوله‌کشی)",w:7,act:6},
+  {n:"تاسیسات برقی",w:6,act:5},{n:"تجهیزات صنعتی و نصب ماشین‌آلات",w:14,act:11},
+  {n:"کانال‌کشی شبکه صنعتی",w:5,act:4},{n:"آسفالت و جدول",w:4,act:4},
+  {n:"نازک‌کاری داخلی",w:6,act:5},{n:"نما و نازک‌کاری خارجی",w:4,act:3},
+  {n:"سیستم اطفاء و HSE",w:3,act:3},{n:"آزمایش و تست",w:3,act:2},
+  {n:"تحویل موقت فاز ۱",w:2,act:1},{n:"رفع نقایص",w:1,act:0},{n:"تحویل قطعی",w:0,act:0}],
+ scenario:"B",
+ compet:[{n:"رقبای داخلی مولتی‌پلکس",k:0.97},{n:"کنسرسیوم فولادی",k:1.02},{n:"پیمانکار تازه‌وارد منطقه",k:0.93}],
+ ck:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+}}
+/* ================= کمکی‌ها ================= */
+const fa="۰۱۲۳۴۵۶۷۸۹", sfa=s=>String(s).replace(/[0-9]/g,d=>fa[d]);
+const num=x=>Number(x)||0;
+const fa2=s=>s.toLocaleString("en-US").replace(/[0-9,.]/g,d=>d===","?"،":fa[+d]);
+const fmt=v=>fa2(Math.round(num(v)));
+const fmtBn=v=>{v=num(v);const b=v/1e9;return fa2(b.toFixed(b<10?2:b<100?1:0))+" میلیارد"};
+const pctf=v=>fa2((num(v)).toFixed(1))+"٪";
+const J=(d,m)=>{const g=new Date();let t=Math.floor(g.getTime()/864e5)+1948320,y=Math.floor(t/1461)*4,n=t%1461;let mo=[0,31,62,93,124,155,186,216,246,276,306,336];let k=0;for(;k<12;k++){if(n<mo[k]+(k<7?31:30))break}const day=n-mo[k]+1;return sfa(`${y+k}/${(k+1).toString().padStart(2,"0")}/${day.toString().padStart(2,"0")}`)};
+function setPath(o,p,v){const a=String(p).split(".");let c=o;for(let i=0;i<a.length-1;i++){c=c[a[i]]=c[a[i]]||{}}c[a[a.length-1]]=v}
+function getPath(o,p){return String(p).split(".").reduce((c,k)=>c&&c[k],o)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+let saveT;const saveSoon=()=>{clearTimeout(saveT);saveT=setTimeout(save,400)};
+function syncInputs(root){root.querySelectorAll("input[data-k],select[data-k]").forEach(el=>{const v=getPath(D,el.dataset.k);if(v!=null)el.value=v})}
+/* ================= محاسبات ================= */
+function comp4026(d){
+ const seas=SEASONS, oh=seas*OH, rg=seas*RG;
+ const c0=seas+oh+rg, base=c0*(1+EQ);
+ const w={ab:num(d.sh.wAb)/100,mk:num(d.sh.wMk)/100,br:num(d.sh.wBr)/100};
+ const kf=1.696*w.ab+1.858*w.mk+1.907*w.br;
+ const Dk=base*kf;
+ const other=num(d.sh.tax)/100+num(d.sh.m104)/100+num(d.sh.room)/100+num(d.sh.audit)/100;
+ const final=Dk*(1+num(d.sh.profit)/100+other);
+ const floor=Dk*(1+other);
+ return {seas,oh,rg,c0,base,kf,Dk,other,final,floor,mismatch:(base-BK)/BK*100};
+}
+function riskCalc(d){
+ const oh=SEASONS*OH,rg=SEASONS*RG,base=(SEASONS+oh+rg)*(1+EQ);
+ const kf=1.696, Dk=base*kf;
+ const other=num(d.risk.tax)/100+num(d.risk.m104)/100+num(d.risk.room)/100+num(d.risk.audit)/100;
+ return {Dk,other,final:Dk*(1+num(d.risk.profit)/100+other),floor:Dk*(1+other)};
+}
+function evm(d){
+ let pv=0,ev=0,plan=0;
+ d.gantt.forEach((g,i)=>{pv+=g.w*(g.act>=ganttPlan(i)?1:g.act/ganttPlan(i));ev+=g.w*Math.min(1,g.act/ganttPlan(i));plan+=g.w});
+ const BAC=243160430768, f=D.final/BAC;
+ return {pv:pv/plan,ev:ev/plan,plan:1,spi:(ev/plan)/(pv/plan),bac:BAC,dev:(ev-pv)/plan*100};
+}
+function ganttPlan(i){return i<6?i+1:i<12?Math.min(12,i+2):12} // برنامه تجمعی ماه
+function machCalc(d){
+ let own=0,rent=0,tot=0,share=num(d.mach.share)/100;
+ d.mach.items.forEach(m=>{
+  const mcost=m.c*num(m.rate)*num(m.mo)*1e6;tot+=mcost;
+  const bcost=num(m.buy)*m.c*1e6 - num(m.resale)*m.c*1e6;
+  const rcost=num(m.rent)*m.c*num(m.months)*1e6;
+  own+=Math.max(bcost,0);rent+=rcost;});
+ return {tot,own,rent,rec:tot*share,better:own<rent?"خرید":"اجاره",diff:Math.abs(own-rent)};
+}
+function sigs(d){
+ const c=comp4026(d),out=[];
+ const mm=Math.abs(c.mismatch);
+ out.push({lv:mm<0.05?"ok":"bad",t:"تطابق قیمت پایه برگه",d:`اختلاف مسیر محاسباتی با مبلغ مستند برگه: ${pctf(c.mismatch)} ${mm<0.05?"— تأیید برآوردگر":"— نیازمند بررسی فوری"}`});
+ const ev=evm(d);
+ if(ev.spi<0.95)out.push({lv:"bad",t:"انحراف پیشرفت",d:`SPI = ${fa2(ev.spi.toFixed(2))} — پیشرفت واقعی عقب‌تر از برنامه است`});
+ else if(ev.spi>1.15)out.push({lv:"warn",t:"انحراف پیشرفت",d:`SPI = ${fa2(ev.spi.toFixed(2))} — جلوتر از برنامه؛ بررسی کیفیت ثبت`});
+ else out.push({lv:"ok",t:"انحراف پیشرفت",d:`SPI = ${fa2(ev.spi.toFixed(2))} — در محدوده قابل قبول`});
+ const mc=machCalc(d);
+ if(mc.rec>0)out.push({lv:"warn",t:"ماشین‌آلات",d:`سهم ماشین‌آلات (${pctf(mc.share*100)}) معادل ${fmtBn(mc.rec)} ریال است؛ راه بهینه: ${mc.better}`});
+ return out;
+}
+/* ================= SVG ================= */
+const C=()=>document.documentElement.dataset.theme==="dark"?"#93a1b8":"#5b6b82";
+function donut(parts,sel){
+ let a=-90,tot=parts.reduce((s,p)=>s+p.v,0),R=60,r=38,cx=80,cy=80,out="";
+ parts.forEach(p=>{const f=p.v/tot,a2=a+f*360;const large=f>0.5?1:0;
+  const x1=cx+R*Math.cos(a*Math.PI/180),y1=cy+R*Math.sin(a*Math.PI/180);
+  const x2=cx+R*Math.cos(a2*Math.PI/180),y2=cy+R*Math.sin(a2*Math.PI/180);
+  const x3=cx+r*Math.cos(a2*Math.PI/180),y3=cy+r*Math.sin(a2*Math.PI/180);
+  const x4=cx+r*Math.cos(a*Math.PI/180),y4=cy+r*Math.sin(a*Math.PI/180);
+  if(f<1)out+=`<path d="M${x1} ${y1} A${R} ${R} 0 ${large} 1 ${x2} ${y2} L${x3} ${y3} A${r} ${r} 0 ${large} 0 ${x4} ${y4} Z" fill="${p.c}" opacity=".88"><title>${p.t}: ${pctf(f*100)}</title></path>`;
+  a=a2});
+ out+=`<text x="80" y="76" text-anchor="middle" font-weight="700" font-size="13" fill="currentColor" style="fill:var(--ink)">${fmtBn(tot)}</text><text x="80" y="92" text-anchor="middle">ریال</text>`;
+ document.querySelector(sel).innerHTML=`<svg viewBox="0 0 160 160" width="100%" style="max-width:210px">${out}</svg>`+parts.map(p=>`<div class="sig" style="padding:4px 8px"><span class="d" style="background:${p.c}"></span><span>${p.t}: <b>${pctf(p.v/tot*100)}</b></span></div>`).join("");
+}
+function bars(vals,labels,sel,h=170){
+ const mx=Math.max(...vals),n=vals.length,bw=100/n;
+ let s=`<defs><linearGradient id="gBar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)"/><stop offset="1" stop-color="#0a3f8f"/></linearGradient></defs>`;
+ const mxI=vals.indexOf(mx);
+ vals.forEach((v,i)=>{const hh=v/mx*(h-34);const x=i*bw+4,w=bw-8;
+  s+=`<rect x="${x}" y="${h-24-hh}" width="${w}" height="${hh}" rx="4" fill="${i===mxI?"url(#gBar)":"var(--acc)"}" opacity="${i===mxI?1:.55}"><title>${labels[i]}: ${fmt(v)}</title></rect>`;
+  s+=`<text x="${x+w/2}" y="${h-28-hh}" text-anchor="middle" style="fill:var(--ink)">${fmtBn(v).replace(" میلیارد","")}</text>`;
+  s+=`<text x="${x+w/2}" y="${h-8}" text-anchor="middle">${labels[i]}</text>`});
+ document.querySelector(sel).innerHTML=`<svg viewBox="0 0 100 ${h}" width="100%" preserveAspectRatio="none" style="overflow:visible">${s}</svg>`;
+}
+function scurve(d,sel){
+ const h=210,W=100;
+ let pv=0,ev=0,tot=0;d.gantt.forEach(g=>tot+=g.w);
+ const cum=(mode)=>{let c=0,arr=[];for(let m=1;m<=12;m++){let s=0;d.gantt.forEach((g,i)=>{const p=ganttPlan(i),end=p;const done=mode==="act"?g.act:p;const frac=Math.max(0,Math.min(1,(m-(end-g.w>0?end-g.w:0))/Math.max(g.w,1)));s+=g.w*(mode==="act"?Math.min(1,g.act/Math.max(p,1))* (m>=Math.min(p,g.act+p)?1:frac):frac)});c+=s;arr.push(c/tot)}return arr};
+ const P=cum("plan"),A=cum("act");
+ const pt=(arr,i)=>`${i*(W/11)},${h-24-arr[i]*(h-44)}`;
+ const line=a=>a.map((v,i)=>i===0?`M${pt(a,i)}`:`L${pt(a,i)}`).join(" ");
+ let s=`<line x1="0" y1="${h-24}" x2="100" y2="${h-24}" stroke="${C()}" stroke-width=".3"/>`;
+ for(let k=0;k<=4;k++){const y=h-24-k*(h-44)/4;s+=`<line x1="0" y1="${y}" x2="100" y2="${y}" stroke="${C()}" stroke-width=".2" opacity=".35"/><text x="101" y="${y+2}" font-size="4">${fa2(k*25)}٪</text>`}
+ s+=`<path d="${line(P)}" fill="none" stroke="var(--acc)" stroke-width="1"/>`;
+ s+=`<path d="${line(A)}" fill="none" stroke="var(--acc2)" stroke-width="1" stroke-dasharray="2 1.2"/>`;
+ for(let i=0;i<12;i++)s+=`<text x="${i*(W/11)}" y="${h-10}" text-anchor="middle" font-size="4">${sfa(i+1)}</text>`;
+ s+=`<rect x="55" y="2" width="2" height="6" fill="var(--acc)"/><text x="59" y="7" font-size="4.5">برنامه</text><rect x="72" y="2" width="2" height="6" fill="var(--acc2)"/><text x="76" y="7" font-size="4.5">واقعی</text>`;
+ document.querySelector(sel).innerHTML=`<svg viewBox="0 0 112 ${h}" width="100%" style="overflow:visible">${s}</svg>`;
+}
+function cashChart(d,sel){
+ const N=Math.max(3,Math.min(36,num(d.cash.months)));const BAC=243160430768;
+ const w=d.gantt.map(g=>g.w),T=w.reduce((a,b)=>a+b,0);
+ const infl=num(d.cash.infl)/100;
+ const sig=(m)=>1/(1+Math.exp(-((m-N*0.45)/(N*0.16))));
+ const cost=[],rec=[];
+ let cumC=0,cumR=0;
+ for(let m=1;m<=N;m++){
+  const prog=Math.min(1,sig(m)),prev=Math.min(1,sig(m-1));
+  const wgt=prog-prev, c=BAC*wgt*Math.pow(1+infl,m-1);
+  let r=BAC*wgt*(1+num(d.cash.prepay)/100*(m===1?1:0));
+  r=BAC*(prog)*(1-num(d.cash.ret)/100) - BAC*Math.max(0,prev)*(1-num(d.cash.ret)/100);
+  cumC+=c;cumR+=r;cost.push(cumC/1e9);rec.push(cumR/1e9);
+ }
+ const mx=Math.max(...cost,...rec)*1.05,h=200,W=100;
+ let s="";
+ for(let k=0;k<=4;k++){const y=h-24-k*(h-44)/4;s+=`<line x1="0" y1="${y}" x2="100" y2="${y}" stroke="${C()}" stroke-width=".2" opacity=".3"/><text x="101" y="${y+2}" font-size="4">${fmt(mx*k/4)}</text>`}
+ const ln=(a,col,dash)=>a.map((v,i)=>(i?"L":"M")+`${i*(W/(N-1))},${h-24-v/mx*(h-44)}`).join(" ");
+ s+=`<path d="${ln(cost)}" fill="none" stroke="var(--bad)" stroke-width="1"/>`;
+ s+=`<path d="${ln(rec)}" fill="none" stroke="var(--ok)" stroke-width="1" ${dash?"stroke-dasharray='2 1'":""}/>`;
+ for(let i=0;i<N;i+=Math.ceil(N/10))s+=`<text x="${i*(W/(N-1))}" y="${h-10}" text-anchor="middle" font-size="4">${sfa(i+1)}</text>`;
+ s+=`<rect x="52" y="2" width="2" height="6" fill="var(--ok)"/><text x="56" y="7" font-size="4.5">دریافتی</text><rect x="70" y="2" width="2" height="6" fill="var(--bad)"/><text x="74" y="7" font-size="4.5">هزینه</text>`;
+ document.querySelector(sel).innerHTML=`<svg viewBox="0 0 112 ${h}" width="100%" style="overflow:visible">${s}</svg>`;
+ const fin=rec[N-1]-cost[N-1];
+ document.querySelector(sel+"F").innerHTML=`جمع دریافتی: <b>${fmt(cost[N-1]===0?0:rec[N-1]*1e9)}</b> ریال — جمع هزینه: <b>${fmt(cost[N-1]*1e9)}</b> ریال — تفاضل پایانی (شامل آزادسازی حسن انجام): <b style="color:${fin>=0?"var(--ok)":"var(--bad)"}">${fmt(fin*1e9)}</b> ریال`;
+}
+/* ================= رندر ================= */
+const TABS=["داشبورد","برگه قیمت","سربه‌سر و رقابت","سناریوها","EVM","گانت","S-Curve","جریان نقدی","ماشین‌آلات","ریسک","چک‌لیست","مدل سه‌بعدی","ارز و کالا","چاپ خلاصه","پشتیبان‌گیری"];
+function fld(l,k,step,after){return `<div class="fl"><label>${l}</label><input data-k="${k}" type="number" ${step?`step="${step}"`:k.includes("wA")||k.includes("wM")||k.includes("wB")?"min=0":""} ${after||""}></div>`}
+function render(){
+ const c=comp4026(D), rk=riskCalc(D), ev=evm(D), mc=machCalc(D), sgs=sigs(D);
+ const TOT=D.projs.reduce((s,p)=>s+p.price,0), AREA=D.projs.reduce((s,p)=>s+p.area,0), UN=D.projs.reduce((s,p)=>s+p.units,0);
+ const main=document.getElementById("main");
+ let h="";
+ const sec=(id,inner,extra="")=>h+=`<section class="tab${id==="t1"?" on":""}" id="${id}">${inner}${extra}</section>`;
+ /* t1 */
+ sec("t1",`
+ <div class="grid g4">
+  ${[["مبلغ کل پرتفوی",fmtBn(TOT)+" ریال"],["متراژ کل",fmt(AREA)+" m²"],["تعداد واحدها",sfa(UN)+" واحد"],["قیمت پایه ۴۰۲۶ (برگه)",fmtBn(BK)+" ریال"]].map(k=>`<div class="card kpi"><div class="v">${k[1]}</div><div class="l">${k[0]}</div></div>`).join("")}
+ </div>
+ <div class="grid g2" style="margin-top:14px">
+  <div class="card"><h3>سیگنال‌های هوشمند</h3>${sgs.map(x=>`<div class="sig ${x.lv}"><span class="d"></span><div><b>${x.t}</b><div class="note">${x.d}</div></div></div>`).join("")}</div>
+  <div class="card"><h3>ساختار قیمت قطعه ۴۰۲۶</h3><div id="donut1" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center"></div></div>
+ </div>
+ <div class="grid g2" style="margin-top:14px">
+  <div class="card"><h3>پرتفوی ۴ قطعه (مبلغ پایه)</h3><div id="pfBars"></div><div class="tablewrap" style="margin-top:8px"><table><tr><th>قطعه</th><th>واحد</th><th>متراژ</th><th>مبلغ (ریال)</th><th>ریال/m²</th></tr>
+  ${D.projs.map(p=>`<tr><td>${sfa(p.n)}</td><td>${sfa(p.units)}</td><td>${fa2(p.area)}</td><td>${fmt(p.price)}</td><td>${fmt(p.price/p.area)}</td></tr>`).join("")}</table></div></div>
+  <div class="card"><h3>حساسیت سود ۵٪ تا ۲۰٪ (قطعه ۴۰۲۶)</h3><div class="tablewrap"><table><tr><th>سود</th><th>قیمت نهایی</th><th>اختلاف با پایه</th></tr>
+  ${[5,8,10,12,15,18,20].map(p=>{const v=c.Dk*(1+p/100+c.other);return `<tr style="${p===num(D.sh.profit)?"color:var(--acc);font-weight:700":""}"><td>${pctf(p)}</td><td>${fmt(v)}</td><td>${pctf((v-BK)/BK*100)}</td></tr>`}).join("")}</table></div></div>
+ </div>`);
+ /* t2 */
+ sec("t2",`
+ <div class="grid g3">
+  ${fld("سود (%)","sh.profit")}${fld("مالیات (%)","sh.tax")}${fld("ماده ۱۰۴ (%)","sh.m104")}
+  ${fld("اتاق بازرگانی (%)","sh.room")}${fld("حسابرسی (%)","sh.audit")}
+  ${fld("وزن ابنیه ٪","sh.wAb")}${fld("وزن مکانیک ٪","sh.wMk")}${fld("وزن برق ٪","sh.wBr")}
+ </div>
+ <div class="card" style="margin-top:12px"><h3>مسیر محاسبه قطعه ۴۰۲۶ + کنترل تطابق</h3>
+  <ol class="chain">
+   <li>جمع فصول برآوردی: <b>${fmt(c.seas)}</b> ریال</li>
+   <li>+ بالاسری ${pctf(OH*100)}: <b>${fmt(c.oh)}</b> — + منطقه‌ای ${pctf(RG*100)}: <b>${fmt(c.rg)}</b> → جمع: <b>${fmt(c.c0)}</b></li>
+   <li>+ تجهیز کارگاه ${pctf(EQ*100)} → قیمت پایه محاسباتی: <b>${fmt(c.base)}</b></li>
+   <li>ضریب تعدیل وزنی k = ۱٫۶۹۶×${pctf(num(D.sh.wAb))} + ۱٫۸۵۸×${pctf(num(D.sh.wMk))} + ۱٫۹۰۷×${pctf(num(D.sh.wBr))} = <b>${fa2(c.kf.toFixed(4))}</b></li>
+   <li>قیمت پس از تعدیل Dk = <b>${fmt(c.Dk)}</b></li>
+   <li>+ سود ${pctf(num(D.sh.profit))} و سایر ${pctf(c.other*100)} → <b>قیمت پیشنهادی: ${fmt(c.final)}</b> ریال</li>
+   <li>کف بدون سود (حد رقابت): <b>${fmt(c.floor)}</b> ریال</li>
+  </ol>
+  <div style="padding:10px;border-radius:var(--r1);background:var(--bg);border:1px solid var(--line)">کنترل تطابق با مبلغ مستند برگه (${fmt(BK)}): اختلاف <span class="${Math.abs(c.mismatch)<0.05?"match-ok":"match-bad"}">${pctf(c.mismatch)}</span></div>
+ </div>
+ <div class="card" style="margin-top:12px"><h3>جدول سه‌ارزی (رسمی/آزاد/یورو)</h3><div class="tablewrap"><table>
+  <tr><th>سناریو</th><th>داخلی (${pctf((1-FX.equipPct)*100)})</th><th>وارداتی (${pctf(FX.equipPct*100)})</th><th>مجموع (ریال)</th><th>مجموع (تومان)</th></tr>
+  ${[["ریال","ریال"],["+ دلار رسمی",FX.usdGov],["+ دلار آزاد",FX.usdFree],["+ یورو رسمی",FX.eurGov],["+ یورو آزاد",FX.eurFree]].map((r,i)=>{
+   if(i===0){const v=c.final;return `<tr><td>مبنای ریالی</td><td>${fmt(v*(1-FX.equipPct))}</td><td>${fmt(v*FX.equipPct)}</td><td>${fmt(v)}</td><td>${fmt(v/10)}</td></tr>`}
+   const rate=r[1];const imp=c.final*FX.equipPct/FX.usdFree*rate; const dom=c.final*(1-FX.equipPct);
+   return `<tr><td>${r[0]}</td><td>${fmt(dom)}</td><td>${fmt(imp)}</td><td>${fmt(dom+imp)}</td><td>${fmt((dom+imp)/10)}</td></tr>`}).join("")}
+ </table></div><div class="note">فرض: سهم تجهیزات وارداتی ${pctf(FX.equipPct*100)} — بخش داخلی با نرخ رسمی، وارداتی با نرخ انتخابی (آزاد/رسمی) تسعیر می‌شود.</div></div>`);
+ /* t3 */
+ sec("t3",`
+ <div class="grid g3">
+  ${["قیمت پیشنهادی ما","کف بدون سود","قیمت پایه برگه"].map((t,i)=>`<div class="card kpi"><div class="v">${fmtBn([c.final,c.floor,BK][i])} ریال</div><div class="l">${t}</div></div>`).join("")}
+ </div>
+ <div class="card" style="margin-top:12px"><h3>سناریوی ریسک (تعدیل کامل ۱٫۹۰۷ برق)</h3>
+  <div class="grid g3"><div class="card"><div class="v">${fmt(rk.Dk)}</div><div class="l">Dk (تعدیل کامل)</div></div>
+  <div class="card"><div class="v">${fmt(rk.floor)}</div><div class="l">کف رقابت</div></div>
+  <div class="card"><div class="v">${fmt(rk.final)}</div><div class="l">قیمت با سود ${pctf(num(D.risk.profit))}</div></div></div>
+  <div class="fl" style="margin-top:10px">${fld("سود سناریوی ریسک (%)","risk.profit")}</div></div>
+ <div class="card" style="margin-top:12px"><h3>رقبا (ضریب نسبت به قیمت پایه)</h3><div class="tablewrap"><table><tr><th>رقبای داخلی مولتی‌پلکس</th><th>کنسرسیوم فولادی</th><th>پیمانکار تازه‌وارد</th><th>ما</th></tr>
+ <tr>${D.compet.map(x=>`<td>${fmt(BK*x.k)}</td>`).join("")}<td style="color:var(--acc);font-weight:700">${fmt(c.final)}</td></tr></table></div></div>`);
+ /* t4 */
+ const sc={A:{l:"محافظه‌کارانه",p:6,k:1.907},B:{l:"متعادل",p:12,k:c.kf},C:{l:"تهاجمی",p:16,k:1.696}};
+ sec("t4",`<div class="card"><h3>سناریوهای پیشنهادی (مسیر تعدیل)</h3><div class="grid g3">
+  ${Object.keys(sc).map(k=>{const s=sc[k];const v=c.base*s.k*(1+s.p/100+c.other);return `<div class="card" style="${D.scenario===k?"border-color:var(--acc);box-shadow:var(--sh2)":""}"><h3>سناریو ${sfa(k==="A"?0:k==="B"?1:2)} — ${s.l}</h3><div class="v" style="font-size:17px;font-weight:700">${fmt(v)}</div><div class="l">ریال — k=${fa2(s.k.toFixed(3))}، سود ${pctf(s.p)}</div><button class="act ghost" style="margin-top:8px" data-act="scn" data-v="${k}">انتخاب</button></div>`}).join("")}
+ </div><div class="note">سناریوی انتخابی سیاست پیشنهادی سامانه است؛ برگه قیمت (تب ۲) مستقل محاسبه می‌شود.</div></div>`);
+ /* t5 */
+ const BACc=243160430768;
+ sec("t5",`<div class="card"><h3>شاخص‌های EVM — قطعه ۴۰۲۶</h3><div class="grid g4">
+  ${[["SPI",fa2(ev.spi.toFixed(2))],["PV (پیشرفت برنامه)",pctf(ev.pv*100)],["EV (پیشرفت کسب‌شده)",pctf(ev.ev*100)],["انحراف",pctf(ev.dev)]].map(k=>`<div class="card kpi"><div class="v">${k[1]}</div><div class="l">${k[0]}</div></div>`).join("")}
+ </div><div class="note">EAC = BAC / SPI = ${fmt(ev.bac/Math.max(ev.spi,.01))} ریال — BAC = ${fmt(ev.bac)} ریال (قیمت پایه مستند)</div></div>`);
+ /* t6 */
+ sec("t6",`<div class="card"><h3>گانت ۱۷ فعالیته — وزن‌دهی و پیشرفت واقعی</h3><div class="tablewrap"><table>
+  <tr><th>#</th><th>فعالیت</th><th>وزن ٪</th><th>پیشرفت واقعی ٪</th><th>برنامه (ماه)</th></tr>
+  ${D.gantt.map((g,i)=>`<tr><td>${sfa(i+1)}</td><td>${g.n}</td><td>${fld("",`gantt.${i}.w`)}</td><td>${fld("",`gantt.${i}.act`)}</td><td>${sfa(ganttPlan(i))}</td></tr>`).join("")}
+ </table></div></div>`);
+ /* t7 */
+ sec("t7",`<div class="card"><h3>منحنی S — برنامه در برابر واقعی (وزن‌های گانت)</h3><div id="sc1"></div></div>`);
+ /* t8 */
+ sec("t8",`<div class="grid g2">
+  <div class="card"><h3>پارامترهای جریان نقدی</h3><div class="grid g2">${fld("مدت (ماه)","cash.months")}${fld("پیش‌پرداخت ٪","cash.prepay")}${fld("حسن انجام ٪","cash.ret")}${fld("تورم ماهانه ٪","cash.infl")}</div></div>
+  <div class="card"><h3>دریافتی در برابر هزینه (تجمعی، میلیارد ریال)</h3><div id="cf1"></div><div class="note" id="cf1F"></div></div>
+ </div>`);
+ /* t9 */
+ sec("t9",`<div class="grid g2">
+  <div class="card"><h3>ناوگان ماشین‌آلات (نرخ: میلیون ریال/ماه/دستگاه)</h3><div class="tablewrap"><table>
+  <tr><th>دستگاه</th><th>تعداد</th><th>نرخ ماهانه</th><th>ماه فعال</th></tr>
+  ${D.mach.items.map((m,i)=>`<tr><td>${m.n}</td><td>${fld("",`mach.items.${i}.c`)}</td><td>${fld("",`mach.items.${i}.rate`)}</td><td>${fld("",`mach.items.${i}.mo`)}</td></tr>`).join("")}
+  </table></div><div class="fl" style="margin-top:8px">${fld("سهم ماشین‌آلات از مبلغ اولیه ٪","mach.share")}</div></div>
+  <div class="card"><h3>اجاره یا خرید</h3><div class="grid g3">
+   <div class="card kpi"><div class="v">${fmtBn(mc.tot)} ریال</div><div class="l">هزینه کل اجاره محاسبه‌شده</div></div>
+   <div class="card kpi"><div class="v">${fmtBn(mc.own)} ریال</div><div class="l">خرید خالص (منهای فروش)</div></div>
+   <div class="card kpi"><div class="v">${mc.better}</div><div class="l">راه بهینه — صرفه: ${fmtBn(mc.diff)} ریال</div></div>
+  </div><div class="note">سهم ماشین‌آلات (${pctf(num(D.mach.share))} معادل ${fmtBn(mc.rec)} ریال) باید با هزینه واقعی ناوگان مقایسه شود.</div></div>
+ </div>`);
+ /* t10 */
+ sec("t10",`<div class="card"><h3>ماتریس ریسک ۵×۵</h3>
+ <div class="tablewrap"><table><tr><th></th><th>اثر ۱</th><th>اثر ۲</th><th>اثر ۳</th><th>اثر ۴</th><th>اثر ۵</th></tr>
+ ${[5,4,3,2,1].map(p=>`<tr><th>احتمال ${sfa(p)}</th>${[1,2,3,2,5].map((_,j)=>{const s=p*(j+1);const col=s>=15?"var(--bad)":s>=8?"var(--warn)":"var(--ok)";return `<td style="text-align:center;background:${col};color:#fff;border-radius:4px">${sfa(p*(j+1))}</td>`}).join("")}</tr>`).join("")}
+ </table></div><div class="note">ریسک‌های کلیدی مناقصه: نوسان ارز (اثر ۵/احتمال ۴)، تعدیل آیین‌نامه‌ای (۴/۳)، تغییر برداشت خاک (۳/۳)، تأمین مالی (۴/۴)، تحریم و تأمین تجهیزات وارداتی (۵/۳). راهکار: سناریوی ریسک (تب ۳) + تسعیر بخش وارداتی.</div></div>`);
+ /* t11 */
+ const ckItems=["مطالعه اسناد و پیوست‌های مناقصه","بازدید از سایت و برداشت ابعادی","تأیید برگه برآورد تفصیلی قطعه ۴۰۲۶","کنترل ضرایب تعدیل با بخشنامه ۹۶/۱۲۹۹۱۸۸","برآورد ماشین‌آلات و تجهیز کارگاه","تسعیر تجهیزات وارداتی (۳۵٪)","تحلیل جریان نقدی و پیش‌پرداخت","مذاکره با تأمین‌کنندگان بتن و فولاد","تدوین سناریوهای A/B/C","بازبینی حقوقی اسناد","تصویب نهایی هیئت‌مدیره","صورتجلسه ارسال پیشنهاد","پیگیری گشایش اعتبار","آماده‌سازی اظهارنامه و ضمانت‌نامه ۵٪","بستن پاکت فنی","بستن پاکت مالی","حضور در جلسه بازگشایی"];
+ sec("t11",`<div class="card"><h3>چک‌لیست ۵ فازی مناقصه</h3><div class="grid g2">${ckItems.map((t,i)=>`<div class="sig" style="cursor:pointer"><input type="checkbox" data-k="ck.${i}" style="width:auto" ${D.ck[i]?"checked":""}><span>${sfa(i+1)}. ${t}</span></div>`).join("")}</div>
+ <div class="note">پیشرفت: ${pctf(D.ck.filter(Boolean).length/ckItems.length*100)}</div></div>`);
+ /* t12 */
+ sec("t12",`<div class="card"><h3>مدل سه‌بعدی پرتفوی (Three.js)</h3><div id="v3d" style="width:100%;height:380px;border-radius:var(--r1);background:var(--bg)"></div><div class="note">ارتفاع هر استوانه متناسب با مبلغ قطعه است. اگر بارگذاری نشد، اتصال به cdnjs را بررسی کنید.</div></div>`);
+ /* t13 */
+ sec("t13",`<div class="card"><h3>نرخ‌های ارز (۵ آبان ۱۴۰۵)</h3><div class="grid g4">
+  ${[["دلار رسمی",FX.usdGov],["دلار آزاد",FX.usdFree],["یورو رسمی",FX.eurGov],["یورو آزاد",FX.eurFree]].map(x=>`<div class="card kpi"><div class="v">${fa2(x[1]/10)}</div><div class="l">${x[0]} — تومان</div></div>`).join("")}
+ </div><div class="tablewrap" style="margin-top:10px"><table><tr><th>ارز</th><th>ارزش پیشنهادی ۴۰۲۶ به آن ارز (بخش وارداتی)</th></tr>
+ ${[["دلار آزاد",FX.usdFree],["یورو آزاد",FX.eurFree],["دلار رسمی",FX.usdGov],["یورو رسمی",FX.eurGov]].map(r=>`<tr><td>${r[0]}</td><td>${fmt(c.final*FX.equipPct/r[1])}</td></tr>`).join("")}</table></div></div>`);
+ /* t14 */
+ sec("t14",`<div class="card"><h3>خلاصه چاپی</h3><div id="printArea">
+ <h2 style="margin-top:0">خلاصه پیشنهاد مناقصه — مهستان هشتگرد (${J()})</h2>
+ <p>پیمانکار محترم؛ پرتفوی شامل ۴ قطعه با ${sfa(UN)} واحد و ${fa2(AREA)} مترمربع و مبلغ پایه ${fmt(TOT)} ریال است. قیمت پیشنهادی قطعه ۴۰۲۶: <b>${fmt(c.final)}</b> ریال (کف رقابت ${fmt(c.floor)}). ضریب تعدیل وزنی ${fa2(c.kf.toFixed(4))}. کنترل تطابق با برگه: ${pctf(c.mismatch)}. راه بهینه ماشین‌آلات: ${mc.better}. SPI=${fa2(ev.spi.toFixed(2))}.</p>
+ </div><button class="act noprint" data-act="print">🖨️ چاپ / PDF</button></div>`);
+ /* t15 */
+ sec("t15",`<div class="card"><h3>پشتیبان‌گیری</h3>
+  <button class="act" data-act="exp">⬇️ خروجی JSON</button> <button class="act ghost" data-act="imp">⬆️ بازیابی از فایل</button> <button class="act danger" data-act="reset">بازنشانی داده‌ها</button>
+  <input type="file" id="impF" accept=".json" style="display:none">
+  <div class="note">تاریخچه نسخه‌ها: ۳٫۱ (تب ارز) ← ۴٫۰ (رفع باگ) ← ۵٫۰ (سربه‌سر/جریان نقدی) ← ۶٫۰ (S-Curve/ماشین‌آلات) ← ۷٫۰ (بازطراحی بصری) ← <b>۸٫۰ (یکپارچه حاضر — کلید ذخیره: ${KEY})</b>. داده نسخه‌های ۴ به بعد به‌صورت خودکار منتقل می‌شود.</div></div>`);
+ main.innerHTML=h;
+ document.getElementById("tabs").innerHTML=TABS.map((t,i)=>`<button data-act="tab" data-v="t${i+1}" class="${i===0?"on":""}">${sfa(i+1)}. ${t}</button>`).join("");
+ syncInputs(main);
+ donut([{v:c.seas,t:"فصول برآورد",c:"#0e5fd8"},{v:c.oh+c.rg+c.base-c.c0+ (c.base-c.c0),t:"بالاسری/منطقه‌ای/تجهیز",c:"#f59e0b"},{v:c.Dk-c.base,t:"تعدیل",c:"#0f9d6e"},{v:c.final-c.Dk-c.other*c.Dk,t:"سود",c:"#d64545"},{v:c.other*c.Dk,t:"سایر",c:"#8b5cf6"}],"#donut1");
+ bars(D.projs.map(p=>p.price),D.projs.map(p=>sfa(p.n)),"#pfBars");
+ scurve(D,"#sc1");
+ cashChart(D,"#cf1");
+ init3d(D.projs);
+}
+/* ================= Three.js ================= */
+let threeLoaded=false;
+function init3d(projs){
+ const el=document.getElementById("v3d");if(!el)return;
+ try{
+  if(!window.THREE){el.innerHTML=`<div class="note" style="padding:20px">کتابخانه Three.js بارگذاری نشد — اتصال اینترنت به cdnjs را بررسی کنید.</div>`;return}
+  const W=el.clientWidth,H=380;
+  const sc=new THREE.Scene();sc.background=new THREE.Color(0x0d1220);
+  const cam=new THREE.PerspectiveCamera(50,W/H,.1,2000);cam.position.set(500,420,520);cam.lookAt(0,80,0);
+  const rn=new THREE.WebGLRenderer({antialias:true});rn.setSize(W,H);el.innerHTML="";el.appendChild(rn.domElement);
+  sc.add(new THREE.AmbientLight(0xffffff,.55));
+  const dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(400,600,300);sc.add(dl);
+  const cols=[0x0e5fd8,0xf59e0b,0x0f9d6e,0xd64545],mx=Math.max(...projs.map(p=>p.price));
+  projs.forEach((p,i)=>{
+   const h=p.price/mx*300,g=new THREE.CylinderGeometry(55,55,h,32);
+   const m=new THREE.Mesh(g,new THREE.MeshPhongMaterial({color:cols[i],transparent:true,opacity:.85}));
+   m.position.set(i*180-270,h/2,0);sc.add(m);
+  });
+  const grid=new THREE.GridHelper(900,18,0x26314a,0x1a2338);sc.add(grid);
+  let a=0;(function loop(){a+=.004;sc.rotation.y=a;rn.render(sc,cam);requestAnimationFrame(loop)})();
+ }catch(e){el.innerHTML=`<div class="note" style="padding:20px">نمایش سه‌بعدی در این مرورگر ممکن نیست.</div>`}
+}
+/* ================= رویدادها ================= */
+document.addEventListener("input",e=>{
+ const el=e.target,k=el.dataset.k;
+ if(!k)return;
+ if(el.type==="checkbox"){setPath(D,k,el.checked)}
+ else{const v=el.value===""?0:Number(el.value);
+  if(el.type==="number"&&isNaN(v)){el.classList.add("bad");return}
+  el.classList.remove("bad");setPath(D,k,v)}
+ saveSoon();
+ const t=document.querySelector(".tab.on").id;
+ if(["t1","t2","t3","t4","t5","t7","t8"].includes(t)||k.startsWith("gantt")||k.startsWith("mach"))render();
+});
+document.addEventListener("click",e=>{
+ const b=e.target.closest("[data-act]");if(!b)return;
+ const a=b.dataset.act,v=b.dataset.v;
+ if(a==="theme"){const h=document.documentElement,dk=h.dataset.theme==="dark";
+  h.dataset.theme=dk?"light":"dark";b.textContent=dk?"🌙 تم تاریک":"☀️ تم روشن";
+  try{localStorage.setItem("mahastanTheme",h.dataset.theme)}catch(x){}}
+ else if(a==="tab"){document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");
+  document.querySelectorAll("section.tab").forEach(s=>s.classList.remove("on"));document.getElementById(v).classList.add("on");window.scrollTo(0,0)}
+ else if(a==="scn"){D.scenario=v;save();render()}
+ else if(a==="print")window.print();
+ else if(a==="exp"){const bl=new Blob([JSON.stringify(D,null,1)],{type:"application/json"});const u=URL.createObjectURL(bl);const q=document.createElement("a");q.href=u;q.download="mahastan-backup.json";q.click();URL.revokeObjectURL(u)}
+ else if(a==="imp")document.getElementById("impF").click();
+ else if(a==="reset"){if(confirm("همه داده‌ها به پیش‌فرض بازگردد؟")){D=defData();save();render()}}
+});
+document.addEventListener("change",e=>{
+ if(e.target.id==="impF"){const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{D=JSON.parse(r.result);save();render()}catch(x){alert("فایل نامعتبر است")}};r.readAsText(f)}
+});
+/* ================= شروع ================= */
+let D=(()=>{try{
+ const s=localStorage.getItem(KEY);if(s)return {...defData(),...JSON.parse(s)};
+ for(const v of VERS){const o=localStorage.getItem(v);if(o){return {...defData(),...JSON.parse(o)}}}
+}catch(e){}return defData()})();
+try{const th=localStorage.getItem("mahastanTheme");if(th==="dark"){document.documentElement.dataset.theme="dark";}}
+catch(e){}
+render();
+if(document.documentElement.dataset.theme==="dark"){const b=document.getElementById("themeBtn");if(b)b.textContent="☀️ تم روشن"}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" onerror="window.THREE=window.THREE||null"></script>
+</body>
+</html>
